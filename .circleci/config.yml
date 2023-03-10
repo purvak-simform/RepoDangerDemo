@@ -21,6 +21,7 @@ jobs:
           command: bundler -v
       - run: gem install bundler
       - run: bundle install
+      - run: echo $DANGER_GITHUB_API_TOKEN
       - run:
           name: Run Danger
           command: bundle exec danger --verbose
