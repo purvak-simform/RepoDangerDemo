@@ -21,9 +21,9 @@ jobs:
           command: bundler -v
       - run: gem install bundler
       - run: bundle install
+      - run: echo $DANGER_GITHUB_API_TOKEN
       - run:
           name: Run Danger
-          command: echo $DANGER_GITHUB_API_TOKEN
           command: bundle exec danger --verbose
     
     # Configure the environment variables that Danger needs to run.
