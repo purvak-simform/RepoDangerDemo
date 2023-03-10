@@ -28,7 +28,6 @@ jobs:
     # Configure the environment variables that Danger needs to run.
     environment:
       DANGER_GITHUB_API_TOKEN: $DANGER_GITHUB_API_TOKEN
-      DANGER_CIRCLE_CI_API_TOKEN: $DANGER_CIRCLE_CI_API_TOKEN
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
