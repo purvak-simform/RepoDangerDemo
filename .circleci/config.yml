@@ -18,8 +18,8 @@ jobs:
       - checkout
       - run:
           name: Which bundler?
-          command: bundle -v
-      - run: gem install bundler 
+          command: sudo gem update --system
+      - run: gem install bundler
       - run: bundle install
       - run:
           name: Run Danger
