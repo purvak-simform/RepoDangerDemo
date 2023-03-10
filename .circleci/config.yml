@@ -21,14 +21,18 @@ jobs:
           command: bundler -v
       - run: gem install bundler
       - run: bundle install
-      - run: echo $DANGER_GITHUB_API_TOKEN
+      - run:
+          name: "echo an env var that is part of our project"
+          command: |
+            echo $DANGER_GITHUB_API_TOKEN # this env var must be set within the project
       - run:
           name: Run Danger
-          command: bundle exec danger --verbose
+          command: |
+            DANGER_GITHUB_API_TOKEN=$DANGER_GITHUB_API_TOKEN bundle exec danger
     
-    # Configure the environment variables that Danger needs to run.
-    environment:
-      DANGER_GITHUB_API_TOKEN: $DANGER_GITHUB_API_TOKEN
+    # # Configure the environment variables that Danger needs to run.
+    # environment:
+    #   DANGER_GITHUB_API_TOKEN: $DANGER_GITHUB_API_TOKEN
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
