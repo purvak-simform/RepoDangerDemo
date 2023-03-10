@@ -21,9 +21,10 @@ jobs:
           command: bundler -v
       - run: gem install bundler
       - run: bundle install
+      - run: cp -f ~/danger/Dangerfile .
       - run:
           name: Run Danger
-          command: bundle exec danger
+          command: bundle exec danger --fail-on-errors=true
     
     # Configure the environment variables that Danger needs to run.
     environment:
