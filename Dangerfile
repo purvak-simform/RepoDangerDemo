@@ -18,16 +18,29 @@ fail("fit left in tests") if `grep -r fit specs/ `.length > 1
 # Mainly to encourage writing up some reasoning about the PR, rather than
 # just leaving a title
 if github.pr_body.length < 5
-  message "Please provide a summary in the Pull Request description"
+  message('Please provide a summary in the Pull Request description')
 end
 
 # If these are all empty something has gone wrong, better to raise it in a comment
 if git.modified_files.empty? && git.added_files.empty? && git.deleted_files.empty?
-  message 'This PR has no changes at all, this is likely an issue during development.'
+  message('This PR has no changes at all, this is likely an issue during development.')
 end
 
 # Changelog entries are required for changes to library files.
 no_changelog_entry = !git.modified_files.include?("CHANGELOG.md")
 if has_app_changes && no_changelog_entry && not_declared_trivial
-  message 'Any changes to library code need a summary in the Changelog.'
+  message('Any changes to library code need a summary in the Changelog.')
+end
+
+if git.modified_files.include?('db/schema.rb')
+  message('Database schema has changed. Did you remember to run `rails db:migrate`?')
+end
+
+message = 'Please include a summary in your pull request description.'
+
+# Check if the pull request description includes a summary
+if github.pr_body.include?('# Summary')
+  puts 'PR includes summary'
+else
+  fail message
 end
