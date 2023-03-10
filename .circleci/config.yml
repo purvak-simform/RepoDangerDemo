@@ -21,7 +21,7 @@ jobs:
           command: bundler -v
       - run: gem install bundler
       - run: bundle install
-      - run: cp -f ~/danger/Dangerfile .
+      - run: cp -f ~/Dangerfile .
       - run:
           name: Run Danger
           command: bundle exec danger --fail-on-errors=true
